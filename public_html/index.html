@@ -12,7 +12,9 @@ and open the template in the editor.
         <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="jquery-3.2.1.min.js" type="text/javascript"></script>
         
-        <title>TODO supply a title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <title>Practica 13 Sintesi</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -22,25 +24,43 @@ and open the template in the editor.
     </head>
     <body>
         
-        <form name="altaUsuario" onsubmit="return validaFormulario()">
-         <div class="container">
-          <div class="row">  
-            <div class="col-xs-12">
-            Nom: 
-            <input name="inputNombre" type="text"/><span></span>
-            Naixement: 
-            <input name="inputData" type="text" /><span></span>
-            <input type="submit" value="Envia formulari"/>
-            <textarea name="textarea">dfasdfa</textarea>
-            
-            <input type="checkbox" name="menjar" value="xocolata"> Xocolata<br/>
-            <input type="checkbox" name="menjar" value="bledes"> Bledes<br/>
-            <input type="checkbox" name="menjar" value="llenties"> Llenties<br/>
+         <div class="container" style="margin-top:50px; border: 1px solid lightgray;">
+          <form name="altaUsuario" onsubmit="return validaFormulario()">
+          
+           <div class="row">
+             <br/> 
+            <div class="col-xs-6">
+             <div id="nom">    
+                 <label>Nom:</label><br/> 
+                <input name="inputNombre" type="text" required/>
+                <div class="comprobarForm" id="comprobarNom"></div>
+             </div><br/>
+             <div id="dataNeix">  
+                 <label>Naixement:</label><br/> 
+                <input name="inputData" type="text" required/><span></span>
+                <div class="comprobarForm" id="comprobarData"></div>
+             </div><br/>   
+             <div class="textarea" style="border: 1px solid black; height: 100px;">
+                <p id="printnom"></p>
+                <p id="printdataNeix"></p>
+             </div><br/>
+            </div>
+              
+            <div class="col-xs-6">
+                
+              <div class="btnNouMenjar p-2">
+                  <button onclick="addEvent()" class="btn btn-info">Afegir un nou menjar</button>
+              </div>    
+              <div id="listaMenjar" ></div>
             
             </div>
-           </div>   
+           </div>
+              <div class="btnEnviar text-center">
+                <input type="submit" class="btn btn-primary" value="Envia formulari"/>
+              </div>  
+           </form><br/>
           </div>   
-        </form>
-               
+        
+        <script src="form.js" type="text/javascript"></script>
     </body>
 </html>
