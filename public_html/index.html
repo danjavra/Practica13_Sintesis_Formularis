@@ -1,66 +1,63 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-        
+
         <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="jquery-3.2.1.min.js" type="text/javascript"></script>
-        
+
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        
+
         <title>Practica 13 Sintesi</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+
         <style type="text/css"> 
             .error{color:red;} .ok{color:green;}
         </style>
     </head>
     <body>
-        
-         <div class="container" style="margin-top:50px; border: 1px solid lightgray;">
-          <form name="altaUsuario" onsubmit="return validaFormulario()">
-          
-           <div class="row">
-             <br/> 
-            <div class="col-xs-6">
-             <div id="nom">    
-                 <label>Nom:</label><br/> 
-                <input name="inputNombre" type="text" required/>
-                <div class="comprobarForm" id="comprobarNom"></div>
-             </div><br/>
-             <div id="dataNeix">  
-                 <label>Naixement:</label><br/> 
-                <input name="inputData" type="text" required/><span></span>
-                <div class="comprobarForm" id="comprobarData"></div>
-             </div><br/>   
-             <div class="textarea" style="border: 1px solid black; height: 100px;">
-                <p id="printnom"></p>
-                <p id="printdataNeix"></p>
-             </div><br/>
-            </div>
-              
-            <div class="col-xs-6">
-                
-              <div class="btnNouMenjar p-2">
-                  <button onclick="addEvent()" class="btn btn-info">Afegir un nou menjar</button>
-              </div>    
-              <div id="listaMenjar" ></div>
-            
-            </div>
-           </div>
-              <div class="btnEnviar text-center">
-                <input type="submit" class="btn btn-primary" value="Envia formulari"/>
-              </div>  
-           </form><br/>
-          </div>   
-        
+
+        <div class="container" style="margin-top:50px; border: 1px solid lightgray;">
+            <form name="altaUsuario" onsubmit="return validaFormulario()">
+
+                <div class="row">
+                    <br/> 
+                    <div class="col-xs-6">
+                        <div id="nom">    
+                            <label>Nom:</label><br/> 
+                            <input name="inputNom" type="text" placeholder="Indica el teu nom" required/>
+                            <div class="comprobarForm" id="comprobarNom"></div>
+                        </div><br/>
+                        <div id="dataNeix">  
+                            <label>Data de naixement:</label><br/> 
+                            <input name="inputData" type="text" placeholder="MM/DD/YYYY" required/><span></span>
+                            <div class="comprobarForm" id="comprobarData"></div>
+                        </div><br/>   
+                        <div class="textarea" style="border: 1px solid black; height: 100px;">
+                            <p id="printnom"></p>
+                            <p id="printdataNeix"></p>
+                        </div><br/>
+                    </div>
+
+                    <div class="col-xs-6">
+
+                        <div class="btnNouMenjar p-2">
+                            <button onclick="addEvent()" class="btn btn-info">Afegir un nou menjar</button>
+                        </div>
+                        <br/>  
+                        <div id="llistaMenjar"></div>
+
+                    </div>
+                </div>
+                <br/>
+                <div class="btnEnviar text-center">
+                    <input type="submit" class="btn btn-primary" value="Validar formulari"/>
+                </div>  
+            </form>
+            <br/>
+        </div>   
+
         <script src="form.js" type="text/javascript"></script>
     </body>
 </html>
