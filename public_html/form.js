@@ -38,7 +38,7 @@ function validaNom(){
             return true;
         }else{
             divNom.setAttribute('class','has-danger');
-            comprobarNom.innerHTML = 'Nom incorrecte';
+            comprobarNom.innerHTML = 'El nom és incorrecte';
             print_nom.innerHTML = '<strong>Nom: </strong>El nom és incorrecte, només accepta entre 3 i 15 lletres';
             print_nom.style.color = 'red';
             return false;
@@ -51,7 +51,7 @@ function validaNaixement(){
     if(inputNaixement.value.match(PatternDate)){
         divNaixement.setAttribute('class','has-success');
         comprobarData.innerHTML = 'Format data Correcte';
-        print_naixement.innerHTML = '<strong>Naixement: </strong>' + inputNaixement.value;
+        print_naixement.innerHTML = '<strong>Data de naixement: </strong>' + inputNaixement.value;
         print_naixement.style.color = 'green';
         return true;
     }else{
@@ -86,7 +86,7 @@ function printListMenjar(){
         
         flechaAbajo.style.marginLeft="5px";
         flechaArriba.style.marginLeft="5px";
-        Borrar.style.marginLeft="5px";
+        Borrar.style.marginRight="10px";
         inputCheckbox.style.marginLeft="15px";
         Borrar.classList.add('fa','fa-ban');
         flechaAbajo.classList.add('fa','fa-arrow-down');
@@ -114,7 +114,7 @@ function addEvent(){
 }
 
 function pujarMenjar(e){
-    var arrayMenjarLength = arrayMenjar.length;
+    var totalMenjar = arrayMenjar.length;
     arrayMenjar2 = [];
     var posMenjar = arrayMenjar.indexOf(e.target.parentNode.lastElementChild.textContent);
     if(posMenjar===0){
@@ -122,7 +122,7 @@ function pujarMenjar(e){
     }else{
        var menjarReplace = arrayMenjar.splice(posMenjar, 1);
        var posReplace = posMenjar-1;
-       for(var i = 0; i<arrayMenjarLength-1;i++){
+       for(var i = 0; i<totalMenjar-1;i++){
            if(i===posReplace){
                arrayMenjar2.push(menjarReplace[0]);
            }
@@ -140,23 +140,23 @@ function eliminarMenjar(e) {
 }
 
 function baixarMenjar(e){
-    var arrayMenjarLength = arrayMenjar.length;
+    var totalMenjar = arrayMenjar.length;
     arrayMenjar2 = [];
     var posMenjar = arrayMenjar.indexOf(e.target.parentNode.lastElementChild.textContent);
-    if(posMenjar===arrayMenjarLength-1){
+    if(posMenjar===totalMenjar-1){
         arrayMenjar2 = arrayMenjar;
     }else{
         var menjarReplace = arrayMenjar.splice(posMenjar,1);
         var posReplace = posMenjar+1;
         console.log(posReplace);
-        console.log(arrayMenjarLength-1);
-        for(var i=0;i<arrayMenjarLength-1;i++){
+        console.log(totalMenjar-1);
+        for(var i=0;i<totalMenjar-1;i++){
             if(i===posReplace){
                 arrayMenjar2.push(menjarReplace[0]);
             }
             arrayMenjar2.push(arrayMenjar[i]);
         }
-        if(posReplace===arrayMenjarLength-1){
+        if(posReplace===totalMenjar-1){
             arrayMenjar2.push(menjarReplace[0]);
         }
 
@@ -164,16 +164,18 @@ function baixarMenjar(e){
     arrayMenjar = arrayMenjar2;
     printListMenjar();
     }
-
-function validaFormulario(){
-    if(validaNom() && validaNaixement() && validaMenjar()){
-        alert("Se ha enviado correctamente");
-    }else{
-        alert("Huaríes de seleccionar més d'un menjar");
-    }
-}
-
-function indicaNouMenjar(){
+    
+   
+ function indicaNouMenjar(){
     var nouMenjar = prompt('Índica el nom del nou menjar');
     return nouMenjar;
 }
+
+function validaFormulario(){
+    if(validaNom() && validaNaixement() && validaMenjar()){
+        alert("Registra't correctament");
+    }else{
+        alert("Hauríes de seleccionar més d'un menjar");
+    }
+}
+
