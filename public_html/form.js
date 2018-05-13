@@ -12,15 +12,26 @@ var divNaixement = document.getElementById('dataNeix');
 var comprobarData = document.getElementById('comprobarData');
 var print_naixement = document.getElementById('printdataNeix');
 
-var checkboxMenjar = document.getElementsByName('menjar');
-var llistaMenjar = document.getElementById('llistaMenjar');
-var arrayMenjar = ['xocolata', 'bledes', 'llenties'];
+var inputEdat = form['inputEdat'];
+var divEdat = document.getElementById('edat');
+var comprobarEdat = document.getElementById('comprobarEdat');
+var print_edat = document.getElementById('printedat');
+var eliminarEdat = form['eliminar'];
 
-printListMenjar();
+var inputMenjar = form["inputMenjar"];
+var modal = document.getElementById("myBtn");
+var afegirMenjar = document.getElementById("myBtn");
+    
 
 function inicio() {
     inputNom.addEventListener('keyup', validaNom, false);
     inputNaixement.addEventListener('keyup', validaNaixement, false);
+    inputEdat.addEventListener('keyup', validaEdat,false);
+    eliminarEdat.addEventListener("click", borrarEdat, false);
+    inputMenjar.addEventListener("keyup", validaInputMenjar, false);
+    afegirMenjar.addEventListener("click", showModal(), false);
+    modal.addEventListener("click", showModal(), false);
+    validaMenjar();
 }
 
 function validaNom() {
@@ -59,119 +70,162 @@ function validaNaixement() {
     }
 }
 
-function validaMenjar() {
-    var validat = false;
+function validaEdat(){
+    var RegAge = /^(0?[1-9]|[1-9][0-9])$/;
+    
+    if(inputEdat.value.match(RegAge) && inputEdat.value >=18){
+        divEdat.setAttribute('class','has-success');
+        comprobarEdat.innerHTML = 'Format edat correcte';
+        print_edat.innerHTML = '<strong>Edat: </strong>' + inputEdat.value;
+        print_edat.style.color = 'green';
+        return true;
+    } else {
+        divEdat.setAttribute('class', 'has-danger');
+        comprobarEdat.innerHTML = 'Format edat incorrecte o menor de 18 anys';
+        print_edat.innerHTML = 'Edat incorrecte posi una edat superior a 18 anys';
+        print_edat.style.color = 'red';
+        return false;  
+    }
+}
 
-    for (var i = 0; i < checkboxMenjar.length; i++) {
-        if (checkboxMenjar[i].checked === true) {
+function validaMenjar() {
+    var checkboxs = form["menjar"];
+    var count = 0;
+    for (var k = 0; k < checkboxs.length; k++) {
+        if (checkboxs[k].checked === true) {
+            document.form["textarea"].innerHTML += " Menjar seleccionat correctament \n";
+            document.getElementById("menjarList").style.borderColor = "green";
+            count++;
             return true;
         }
     }
-    return validat;
-}
-
-function printListMenjar() {
-    llistaMenjar.innerHTML = '';
-    for (var i = 0; i < arrayMenjar.length; i++) {
-
-        var newDiv = document.createElement('DIV');
-        var Borrar = document.createElement('i');
-        var flechaAbajo = document.createElement('i');
-        var flechaArriba = document.createElement('i');
-        var inputCheckbox = document.createElement('input');
-
-        flechaAbajo.style.marginLeft = "5px";
-        flechaArriba.style.marginLeft = "5px";
-        Borrar.style.marginRight = "10px";
-        inputCheckbox.style.marginLeft = "15px";
-        Borrar.classList.add('fa', 'fa-ban');
-        flechaAbajo.classList.add('fa', 'fa-arrow-down');
-        flechaArriba.classList.add('fa', 'fa-arrow-up');
-        inputCheckbox.setAttribute('type', 'checkbox');
-        inputCheckbox.setAttribute('name', 'menjar');
-        inputCheckbox.setAttribute('value', arrayMenjar[i]);
-
-        Borrar.setAttribute('onclick', 'eliminarMenjar(event)');
-        flechaArriba.setAttribute('onclick', 'pujarMenjar(event)');
-        flechaAbajo.setAttribute('onclick', 'baixarMenjar(event)');
-
-        newDiv.appendChild(Borrar);
-        newDiv.appendChild(flechaAbajo);
-        newDiv.appendChild(flechaArriba);
-        newDiv.appendChild(inputCheckbox);
-        newDiv.innerHTML += '<span style="margin-left:5px;" >' + arrayMenjar[i] + '</span>';
-        llistaMenjar.appendChild(newDiv);
+    if (count < 1) {
+        document.form["textarea"].innerHTML += " ERROR: Cap menjar seleccionat \n";
+        document.getElementById("menjarList").style.borderColor = "red";
+        return false;
     }
 }
 
-function addEvent() {
-    arrayMenjar.push(indicaNouMenjar());
-    printListMenjar();
+function showModal() {
+    var modal = document.getElementById('myModal');
+    var btn = document.getElementById("myBtn");
+    var span = document.getElementsByClassName("close")[0];
+    btn.onclick = function () {
+        modal.style.display = "block";
+    };
+    span.onclick = function () {
+        modal.style.display = "none";
+    };
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
 }
 
-function pujarMenjar(e) {
-    var totalMenjar = arrayMenjar.length;
-    arrayMenjar2 = [];
-    var posMenjar = arrayMenjar.indexOf(e.target.parentNode.lastElementChild.textContent);
-    if (posMenjar === 0) {
-        arrayMenjar2 = arrayMenjar;
+function validaInputMenjar() {
+    var inputMenjar = form["inputMenjar"];
+    //    /^[A-z]{3,15}$/
+    var RegExPattern = /^[A-z]{2,50}$/;
+    if (inputMenjar.value.match(RegExPattern)) { 
+        inputMenjar.style.border = "1px solid green";
+        inputMenjar.nextElementSibling.innerHTML = "OK";
+        inputMenjar.nextElementSibling.className = "ok";
+        return true;
     } else {
-        var menjarReplace = arrayMenjar.splice(posMenjar, 1);
-        var posReplace = posMenjar - 1;
-        for (var i = 0; i < totalMenjar - 1; i++) {
-            if (i === posReplace) {
-                arrayMenjar2.push(menjarReplace[0]);
-            }
-            arrayMenjar2.push(arrayMenjar[i]);
-        }
+        inputMenjar.style.border = "1px solid red";
+        inputMenjar.nextElementSibling.innerHTML = "ERROR: s'ha de posar entre 2 i 50 lletres";
+        inputMenjar.nextElementSibling.className = "error";
+        return false;
     }
-    arrayMenjar = arrayMenjar2;
-    printListMenjar();
 }
 
-function eliminarMenjar(e) {
-    var posMenjar = arrayMenjar.indexOf(e.path[1].lastElementChild.textContent);
-    arrayMenjar.splice(posMenjar, 1);
-    printListMenjar();
-}
-
-function baixarMenjar(e) {
-    var totalMenjar = arrayMenjar.length;
-    arrayMenjar2 = [];
-    var posMenjar = arrayMenjar.indexOf(e.target.parentNode.lastElementChild.textContent);
-    if (posMenjar === totalMenjar - 1) {
-        arrayMenjar2 = arrayMenjar;
+var listFood = document.getElementById('menjarList');
+function addMenjar() {
+    var newDiv = document.createElement('DIV');
+    var inputMenjar = form["inputMenjar"];
+   
+    if (inputMenjar.value === "") {
+        var modal = document.getElementById('myModal');
+        modal.style.display = "block";
     } else {
-        var menjarReplace = arrayMenjar.splice(posMenjar, 1);
-        var posReplace = posMenjar + 1;
-        console.log(posReplace);
-        console.log(totalMenjar - 1);
-        for (var i = 0; i < totalMenjar - 1; i++) {
-            if (i === posReplace) {
-                arrayMenjar2.push(menjarReplace[0]);
-            }
-            arrayMenjar2.push(arrayMenjar[i]);
-        }
-        if (posReplace === totalMenjar - 1) {
-            arrayMenjar2.push(menjarReplace[0]);
-        }
+        listFood.appendChild(newDiv);
+        newDiv.setAttribute("id", inputMenjar.value);
 
+        var borrar = document.createElement('i');
+        borrar.style.cursor = "pointer";
+        borrar.className = "fas fa-ban";
+        borrar.setAttribute('onclick', `eliminarMenjar('${inputMenjar.value}')`);
+        newDiv.appendChild(borrar);
+
+        var pujar = document.createElement('i');
+        pujar.style.cursor = "pointer";
+        pujar.style.marginLeft = "4.5px";
+        pujar.className = "far fa-caret-square-up";
+        pujar.setAttribute('onclick', `pujarMenjar('${inputMenjar.value}')`);
+        newDiv.appendChild(pujar);
+
+        var baixar = document.createElement('i');
+        baixar.style.cursor = "pointer";
+        baixar.style.marginLeft = "4.5px";
+        baixar.className = "far fa-caret-square-down";
+        baixar.setAttribute('onclick', `baixarMenjar('${inputMenjar.value}')`);
+        newDiv.appendChild(baixar);
+
+        var checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.name = "menjar";
+        checkbox.style.marginLeft = "6.5px";
+        checkbox.value = inputMenjar.value;
+        checkbox.setAttribute('onchange', 'validaMenjar(this)');
+        newDiv.appendChild(checkbox);
+
+        var a = document.createElement('a');
+        var text = document.createTextNode(inputMenjar.value);
+        a.appendChild(text);
+        newDiv.appendChild(a);
+  
+        var modal = document.getElementById('myModal');
+        modal.style.display = "none";
+        var input = form["inputMenjar"];
+        input.value = "";
     }
-    arrayMenjar = arrayMenjar2;
-    printListMenjar();
 }
 
+function eliminarMenjar(name) {
+    var div = document.getElementById(name);
+    if (div !== null) {
+        var parent = div.parentElement;
+        parent.removeChild(div);
+    }
+}
 
-function indicaNouMenjar() {
-    var nouMenjar = prompt('Índica el nom del nou menjar');
-    return nouMenjar;
+function pujarMenjar(name) {
+    var div = document.getElementById(name);
+    if (div.previousElementSibling) {
+        div.parentNode.insertBefore(div, div.previousElementSibling);
+    }
+}
+
+function baixarMenjar(name) {
+    var div = document.getElementById(name);
+    if (div.nextElementSibling)
+        div.parentNode.insertBefore(div.nextElementSibling, div);
+}
+
+function borrarEdat(){
+    var eliminarEdat = form["eliminar"];
+    var parent = eliminarEdat.parentElement;
+    parent.remove(eliminarEdat);
 }
 
 function validaFormulario() {
-    if (validaNom() && validaNaixement() && validaMenjar()) {
+    if (validaNom() && validaNaixement() && validaEdat() && validaMenjar()) {
         alert("Registra't correctament");
+        return true;
     } else {
-        alert("Hauríes de seleccionar més d'un menjar");
+        alert("Registre incorrecte, valor no vàlid o falta emplenar");
+        return false;
     }
 }
 

@@ -6,8 +6,7 @@
         <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="jquery-3.2.1.min.js" type="text/javascript"></script>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>     
         <title>Practica 13 Sintesi</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,21 +29,54 @@
                             <label>Data de naixement:</label><br/> 
                             <input name="inputData" type="text" placeholder="MM/DD/YYYY" required/><span></span>
                             <div class="comprobarForm" id="comprobarData"></div>
-                        </div><br/>   
+                        </div><br/>
+                        <div id="edat">  
+                            <label>Edat:</label><br/> 
+                            <input name="inputEdat" type="text" placeholder="Indica la teva edat" required/><span></span>
+                             <br/> 
+                            <input type="button" name="eliminar" value="Eliminar Edat">
+                            <div class="comprobarForm" id="comprobarEdat"></div>
+                        </div><br/>
+                      
                         <div class="textarea" style="border: 1px solid black; height: 100px;">
                             <p id="printnom"></p>
                             <p id="printdataNeix"></p>
+                            <p id="printedat"></p>
                         </div><br/>
                     </div>
 
                     <div class="col-xs-6">
 
-                        <div class="btnNouMenjar p-2">
-                            <button onclick="addEvent()" class="btn btn-info">Afegir un nou menjar</button>
+                        <div id="menjarList" style="border-style: groove">
+                            <div style="display: block" id="Xocolata">
+                                <i style="cursor: pointer" class="fas fa-ban" onclick="eliminarMenjar('Xocolata')"></i>
+                                <i style="cursor: pointer" class="far fa-caret-square-up" onclick="pujarMenjar('Xocolata')"></i>
+                                <i style="cursor: pointer" class="far fa-caret-square-down" onclick="baixarMenjar('Xocolata')"></i>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="menjar" value="Xocolata" onchange="validaMenjar(this)"><span id="NombreMenjar">Xocolata</span>
+                            </div>
+                            <div style="display: block" id="Bledes">
+                                <i  style="cursor: pointer" class="fas fa-ban" onclick="eliminarMenjar('Bledes')"></i>
+                                <i style="cursor: pointer" class="far fa-caret-square-up" onclick="pujarMenjar('Bledes')"></i>
+                                <i style="cursor: pointer" class="far fa-caret-square-down" onclick="baixarMenjar('Bledes')"></i>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="menjar" value="Bledes" onchange="validaMenjar(this)"><span id="NombreMenjar">Bledes</span>
+                            </div>  
+                            <div style="display: block" id="Llenties">
+                                <i style="cursor: pointer" class="fas fa-ban" onclick="eliminarMenjar('Llenties')"></i>
+                                <i style="cursor: pointer" class="far fa-caret-square-up" onclick="pujarMenjar('Llenties')"></i>
+                                <i style="cursor: pointer" class="far fa-caret-square-down" onclick="baixarMenjar('Llenties')"></i>
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="menjar" value="Llenties" onchange="validaMenjar(this)"><span id="NombreMenjar">Llenties</span>
+                            </div>
                         </div>
-                        <br/>  
-                        <div id="llistaMenjar"></div>
-
+                        <button id="myBtn" name="myBtn" >Afegir Menjar</button>
+                        <div id="myModal" class="modal" style="width:36.5%; left:51%; top:32%;">
+                            <div class="modal-content" style="height: 35%">
+                                <span class="close">&times;</span>
+                                Nom del menjar:<input type="text" name="inputMenjar" class="form-control" style="height: 35%" placeholder="Escriu el nom del menjar que es vol afegir">
+                                <span></span>
+                                <button onclick="addMenjar()">Afegir Menjar</button>
+                            </div>
+                        </div>
+                        <br>
                     </div>
                 </div>
                 <br/>
