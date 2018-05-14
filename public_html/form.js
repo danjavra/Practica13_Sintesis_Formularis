@@ -91,6 +91,7 @@ function validaEdat(){
 function validaMenjar() {
     var checkboxs = form["menjar"];
     var count = 0;
+    
     for (var k = 0; k < checkboxs.length; k++) {
         if (checkboxs[k].checked === true) {
             document.form["textarea"].innerHTML += " Menjar seleccionat correctament \n";
@@ -110,6 +111,7 @@ function showModal() {
     var modal = document.getElementById('myModal');
     var btn = document.getElementById("myBtn");
     var span = document.getElementsByClassName("close")[0];
+    
     btn.onclick = function () {
         modal.style.display = "block";
     };
@@ -125,8 +127,8 @@ function showModal() {
 
 function validaInputMenjar() {
     var inputMenjar = form["inputMenjar"];
-    //    /^[A-z]{3,15}$/
     var RegExPattern = /^[A-z]{2,50}$/;
+    
     if (inputMenjar.value.match(RegExPattern)) { 
         inputMenjar.style.border = "1px solid green";
         inputMenjar.nextElementSibling.innerHTML = "OK";

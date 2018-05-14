@@ -55,7 +55,7 @@
                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="menjar" value="Xocolata" onchange="validaMenjar(this)"><span id="NombreMenjar">Xocolata</span>
                             </div>
                             <div style="display: block" id="Bledes">
-                                <i  style="cursor: pointer" class="fas fa-ban" onclick="eliminarMenjar('Bledes')"></i>
+                                <i style="cursor: pointer" class="fas fa-ban" onclick="eliminarMenjar('Bledes')"></i>
                                 <i style="cursor: pointer" class="far fa-caret-square-up" onclick="pujarMenjar('Bledes')"></i>
                                 <i style="cursor: pointer" class="far fa-caret-square-down" onclick="baixarMenjar('Bledes')"></i>
                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="menjar" value="Bledes" onchange="validaMenjar(this)"><span id="NombreMenjar">Bledes</span>
@@ -67,13 +67,13 @@
                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox3" name="menjar" value="Llenties" onchange="validaMenjar(this)"><span id="NombreMenjar">Llenties</span>
                             </div>
                         </div>
-                        <button id="myBtn" name="myBtn" >Afegir Menjar</button>
+                       <input type="button" id="myBtn" name="myBtn" value="Afegir Menjar">
                         <div id="myModal" class="modal" style="width:36.5%; left:51%; top:32%;">
-                            <div class="modal-content" style="height: 35%">
+                            <div class="modal-content">
                                 <span class="close">&times;</span>
-                                Nom del menjar:<input type="text" name="inputMenjar" class="form-control" style="height: 35%" placeholder="Escriu el nom del menjar que es vol afegir">
+                                Nom del menjar:<input type="text" name="inputMenjar" class="form-control" style="height: 90px" placeholder="Escriu el nom del menjar que es vol afegir">
                                 <span></span>
-                                <button onclick="addMenjar()">Afegir Menjar</button>
+                                <input type="button" onclick="addMenjar()" value="Afegir Menjar">
                             </div>
                         </div>
                         <br>
